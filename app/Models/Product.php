@@ -20,4 +20,9 @@ class Product extends Model
     {
         return $this->belongsTo(Color::class);
     }
+
+    public function productTypes()
+    {
+        return $this->hasMany(TypeAssignment::class, 'product_id');
+    }
 }

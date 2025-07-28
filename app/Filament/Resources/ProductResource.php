@@ -22,7 +22,8 @@ use Filament\Infolists\Infolist;
 use Filament\Infolists\Components;
 use Filament\Forms\Components\Section;
 use Filament\Infolists\Components\TextEntry;
-
+use Filament\Forms\Components\Repeater;
+use Filament\Infolists\Components\RepeatableEntry;
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
@@ -44,6 +45,12 @@ class ProductResource extends Resource
                 Select::make('color_id')
                 ->relationship('color', 'name')
                 ->required(),
+                 Repeater::make('product_types')
+                    ->schema([
+                        TextInput::make('name'),
+                        TextInput::make('bouns_number'),
+                    ])
+                    ->columns(2)
             ]);
     }
 
@@ -88,6 +95,14 @@ class ProductResource extends Resource
                     TextEntry::make('category.name'),
                     TextEntry::make('color.name'),
                 ]),
+                Components\Section::make()
+                ->schema([
+                    RepeatableEntry::make('productTypes')
+                    ->schema([
+                        TextEntry::make('type.name'),
+                ]),
+            ]),
+                
         ]);
     }
     
