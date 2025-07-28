@@ -35,7 +35,8 @@ class ProductResource extends Resource
             ->schema([
                 TextInput::make('name')
                 ->unique(ignoreRecord: true)
-                ->required(),
+                ->required()
+                ->maxLength(255),
                 Textarea::make('description'),
                 Select::make('category_id')
                   ->relationship('category', 'name')

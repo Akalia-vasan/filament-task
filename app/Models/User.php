@@ -11,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Filament\Panel;
 class User extends Authenticatable implements FilamentUser
 {
+    protected $fillable = ['name', 'email', 'password'];
     public function canAccessPanel(Panel $panel): bool
     {
         return true;

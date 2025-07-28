@@ -10,8 +10,15 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Infolists\Infolist;
+use Filament\Infolists\Components;
+use Filament\Forms\Components\Section;
+use Filament\Infolists\Components\TextEntry;
 
 class ProductTypeResource extends Resource
 {
@@ -23,7 +30,10 @@ class ProductTypeResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('name')
+                ->maxLength(255)
+                ->required(),
+                TextInput::make('bouns_number'),
             ]);
     }
 
@@ -31,14 +41,14 @@ class ProductTypeResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name')->searchable()->sortable(),
+                TextColumn::make('bouns_number')->searchable()->sortable(),
             ])
-            ->filters([
-                //
-            ])
+            
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -50,11 +60,16 @@ class ProductTypeResource extends Resource
             ]);
     }
     
-    public static function getRelations(): array
+    public static function infolist(Infolist $infolist): Infolist
     {
-        return [
-            //
-        ];
+        return $infolist
+        ->schema([
+            Components\Section::make()
+                ->schema([
+                    TextEntry::make('name'),
+                    TextEntry::make('bouns_number'),
+                ]),
+        ]);
     }
     
     public static function getPages(): array

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('type_assignments', function (Blueprint $table) {
             $table->id();
+            $table->integer('product_type_id')->unsigned();
+            $table->integer('product_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

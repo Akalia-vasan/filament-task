@@ -13,7 +13,7 @@ php artisan key:generate
 5. migrate and seed at the same time
 php artisan migrate:fresh --seed
 
-6A. convert ".env.example" to ".env"
+6. convert ".env.example" to ".env"
 
 6B. change the 'database name' & 'username' & 'password'
 DB_HOST=localhost
@@ -21,6 +21,8 @@ DB_DATABASE=own_databse_name
 DB_USERNAME=root
 DB_PASSWORD=
 
+7. run to create user 
+php artisan make:filament-user
 
-7. start the server
+8. start the server
 php artisan serve

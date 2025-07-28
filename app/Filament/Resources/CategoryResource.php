@@ -31,7 +31,7 @@ class CategoryResource extends Resource
             ->schema([
                 TextInput::make('name')
                 ->unique(ignoreRecord: true)
-                ->required(),
+                ->required()->maxLength(50),
                 TextInput::make('description'),
             ]);
     }
